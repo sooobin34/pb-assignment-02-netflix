@@ -1,0 +1,145 @@
+/* src/pages/Wishlist/wishlist.css */
+
+.wishlist-container {
+    padding-top: 40px;
+    padding-inline: 4%; /* ✅ Search와 동일하게 % 기반 여백 */
+    padding-bottom: 32px;
+    background-color: #000;     /* ✅ Search와 동일한 블랙 배경 */
+    min-height: 100vh;
+    color: #fff;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1); /* ✅ 부드러운 등장 */
+}
+
+/* Search에서 쓰던 애니메이션 – 이미 정의돼 있다면 중복 정의여도 괜찮음 */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ✅ Search의 .search-title와 동일한 느낌으로 맞추기 */
+.wishlist-title {
+    font-size: 2rem;        /* 기존 24px → 2rem */
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #fff;
+    letter-spacing: -0.5px;
+}
+
+/* 찜한 영화가 없을 때 */
+.wishlist-empty {
+    margin-top: 40px;
+    padding: 24px 20px;
+    border-radius: var(--radius-lg);
+    background: radial-gradient(circle at top left, #222 0, #111 55%, #000 100%);
+    border: 1px solid var(--border-subtle);
+    color: #bdbdbd;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* 카드 그리드 – 이미 반응형이긴 했지만 Search와 느낌 맞게 유지 */
+.wishlist-grid {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.wishlist-card {
+    background: var(--bg-elevated);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.wishlist-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
+}
+
+.wishlist-poster-wrap {
+    position: relative;
+    overflow: hidden;
+    max-height: 300px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+}
+
+.wishlist-poster-wrap img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    transform: scale(1.02);
+    transition: transform 0.25s ease;
+    border-radius: inherit;
+}
+
+.wishlist-card:hover .wishlist-poster-wrap img {
+    transform: scale(1.08);
+}
+
+.wishlist-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+}
+
+.wishlist-info {
+    padding: 12px 12px 16px;
+}
+
+.wishlist-movie-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.wishlist-meta {
+    display: flex;
+    gap: 10px;
+    font-size: 12px;
+    color: #b0b0b0;
+    margin-bottom: 6px;
+}
+
+.wishlist-overview {
+    font-size: 12px;
+    color: #d0d0d0;
+    line-height: 1.5;
+}
+
+/* ✅ 모바일 반응형 – 카드 폭 줄이고, 제목도 살짝 줄이기 */
+@media (max-width: 768px) {
+    .wishlist-container {
+        padding-inline: 5%;   /* 좁은 화면에서 살짝 더 여유 */
+    }
+
+    .wishlist-title {
+        font-size: 1.6rem;
+    }
+
+    .wishlist-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .wishlist-title {
+        font-size: 1.4rem;
+    }
+}

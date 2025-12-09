@@ -1,0 +1,115 @@
+/* 전체 헤더 바 */
+.app-header {
+    height: 56px;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to right, #000000, #111111);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* 왼쪽 영역: 로고 + 네비게이션 */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+/* 로고 */
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.logo-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 30% 30%, #ffcc66, #ff9900);
+}
+
+/* 네비게이션 (Home / Popular / Search / Wishlist) */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-link {
+    position: relative;
+    font-size: 15px;
+    color: #e5e5e5;
+    text-decoration: none;
+    padding-bottom: 4px;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+}
+
+.nav-link-active {
+    color: #ffffff;
+}
+
+.nav-link-active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: #e50914;
+}
+
+/* 오른쪽 영역 */
+.header-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap; /* 한 줄로 유지 */
+}
+
+/* 환영 문구 */
+.header-welcome {
+    font-size: 14px;
+    color: #f3f4f6;
+}
+
+/* 계정 설정 버튼 */
+.header-account-btn {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(248, 250, 252, 0.6);
+    background: transparent;
+    color: #f9fafb;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.header-account-btn:hover {
+    background: rgba(249, 250, 251, 0.08);
+}
+
+/* ✅ 작은 화면에서 깨지지 않게 처리 */
+@media (max-width: 768px) {
+    .app-header {
+        padding: 0 16px;
+    }
+
+    .header-welcome {
+        display: none; /* 모바일에서는 환영 문구 숨김 */
+    }
+
+    .header-account-btn {
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,123 @@
+/* src/components/movies/movies.css */
+
+.movie-section {
+    margin-top: 24px;
+}
+
+.movie-section-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.movie-row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.movie-row::-webkit-scrollbar {
+    height: 6px;
+}
+.movie-row::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 999px;
+}
+
+.movie-card {
+    position: relative;
+    flex: 0 0 150px;
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #111;
+    transform: translateZ(0);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.movie-card img {
+    width: 100%;
+    height: 225px;
+    object-fit: cover;
+    display: block;
+}
+
+.movie-card:hover {
+    transform: scale(1.06);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9);
+    z-index: 1;
+}
+
+.movie-card-info {
+    padding: 6px 8px 8px;
+    font-size: 12px;
+}
+
+.movie-card-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie-card-meta {
+    font-size: 11px;
+    color: #aaa;
+}
+
+.movie-card-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    padding: 3px 6px;
+    border-radius: 999px;
+    background: rgba(229, 9, 20, 0.9);
+    font-size: 10px;
+}
+
+.movie-card-badge.outlined {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #fff;
+}
+
+/* 로딩 상태 */
+.movie-row-loading {
+    display: flex;
+    gap: 12px;
+}
+
+.movie-skeleton {
+    flex: 0 0 150px;
+    height: 225px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #111 0, #222 50%, #111 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.error-banner {
+    margin-top: 16px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    background: rgba(229, 9, 20, 0.15);
+    color: #ff9b9b;
+    font-size: 13px;
+}
+
+.home-container {
+    padding-top: 40px;
+    padding-inline: 16px;
+    padding-bottom: 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
