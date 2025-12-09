@@ -121,3 +121,37 @@
     padding-bottom: 32px;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
+
+
+/* ===== 영화 Row 모바일 튜닝 ===== */
+@media (max-width: 600px) {
+    .movie-row {
+        margin-bottom: 20px;
+    }
+
+    .movie-row-header {
+        padding-inline: 4px;
+    }
+
+    .movie-row-title {
+        font-size: 1rem;
+    }
+
+    /* 가로 스크롤 캐러셀 */
+    .movie-row-list {
+        gap: 12px;
+        padding-bottom: 8px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+    }
+
+    .movie-card {
+        min-width: 130px;
+        max-width: 150px;
+        scroll-snap-align: start;
+    }
+
+    .movie-card img {
+        border-radius: 10px;
+    }
+}

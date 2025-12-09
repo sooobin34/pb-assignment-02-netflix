@@ -274,3 +274,42 @@
     font-size: 13px;
     color: #d1d5db;
 }
+
+/* ===== Featured Slider 모바일 최적화 ===== */
+@media (max-width: 600px) {
+    .featured-wrapper {
+        margin-top: -8px;
+    }
+
+    .featured-card {
+        flex-direction: column;
+        padding: 18px 14px;
+    }
+
+    .featured-text {
+        max-width: 100%;
+    }
+
+    .featured-title {
+        font-size: 1.3rem;
+    }
+
+    .featured-overview {
+        font-size: 0.9rem;
+        max-height: 5.5rem;
+    }
+
+    .featured-image-wrap {
+        margin-top: 10px;
+        height: 190px;
+    }
+
+    .featured-nav {
+        width: 32px;
+        height: 32px;
+    }
+
+    .featured-dots {
+        bottom: 10px;
+    }
+}

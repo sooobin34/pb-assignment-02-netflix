@@ -241,3 +241,40 @@
         filter: blur(2px);
     }
 }
+
+/* ===== Profile Select 모바일 레이아웃 ===== */
+@media (max-width: 600px) {
+    .profile-select-page {
+        padding-top: 64px;
+        padding-inline: 4%;
+        padding-bottom: 80px;
+    }
+
+    .profile-select-title {
+        font-size: 1.3rem;
+        text-align: left;
+        margin-bottom: 10px;
+    }
+
+    .profile-subtext {
+        font-size: 0.9rem;
+    }
+
+    .profile-grid {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 카드 2개씩 */
+        gap: 14px;
+    }
+
+    .profile-card {
+        padding: 14px 10px;
+        border-radius: 14px;
+    }
+
+    .profile-name {
+        font-size: 0.9rem;
+        margin-top: 4px;
+    }
+}
+
