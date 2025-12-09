@@ -15,7 +15,7 @@ const BACKDROP_BASE = "https://image.tmdb.org/t/p/w1280";
 
 export const FeaturedSlider = () => {
     const [movies, setMovies] = useState<Movie[]>([]);
-    // 가짜 슬라이드 포함한 인덱스 (0 = 마지막 복제, 1~n = 실제, n+1 = 첫 복제)
+    // 0 = 마지막 복제, 1~n = 실제, n+1 = 첫 복제
     const [index, setIndex] = useState(1);
     const [enableTransition, setEnableTransition] = useState(true);
 
@@ -28,7 +28,7 @@ export const FeaturedSlider = () => {
                     .filter((m) => m.backdrop_path)
                     .slice(0, 6);
                 setMovies(filtered);
-                setIndex(1); // 첫 로드 시 항상 1에서 시작
+                setIndex(1);
             } catch (e) {
                 console.error(e);
             }
@@ -41,15 +41,9 @@ export const FeaturedSlider = () => {
 
     // 앞뒤로 하나씩 복제한 가상 슬라이드 배열
     const virtualSlides =
-        total > 0
-            ? [movies[total - 1], ...movies, movies[0]]
-            : [];
+        total > 0 ? [movies[total - 1], ...movies, movies[0]] : [];
 
     const virtualTotal = virtualSlides.length;
-
-    // 한 슬라이드가 차지하는 비율
-    const slideWidthPercent =
-        virtualTotal > 0 ? 100 / virtualTotal : 100;
 
     // 다음 슬라이드 (오른쪽)
     const goNext = useCallback(() => {
@@ -57,7 +51,6 @@ export const FeaturedSlider = () => {
         setEnableTransition(true);
         setIndex((prev) => {
             const next = prev + 1;
-            // 맨 끝 복제 슬라이드(n+1)까지만 이동
             return next >= virtualTotal ? virtualTotal - 1 : next;
         });
     }, [virtualTotal]);
@@ -68,7 +61,6 @@ export const FeaturedSlider = () => {
         setEnableTransition(true);
         setIndex((prev) => {
             const next = prev - 1;
-            // 맨 앞 복제 슬라이드(0)까지만 이동
             return next <= 0 ? 0 : next;
         });
     }, [virtualTotal]);
@@ -82,7 +74,7 @@ export const FeaturedSlider = () => {
         return () => window.clearInterval(id);
     }, [virtualTotal, goNext]);
 
-    // transition 끝났을 때(복제 슬라이드에 도달하면) 눈에 안 보이게 점프
+    // transition 잠깐 끊었다가 다시 켜기
     useEffect(() => {
         if (!enableTransition) {
             const id = window.requestAnimationFrame(() => {
@@ -122,10 +114,7 @@ export const FeaturedSlider = () => {
                 <div
                     className="featured-track"
                     style={{
-                        width: `${virtualTotal * 100}%`,
-                        transform: `translateX(-${
-                            index * slideWidthPercent
-                        }%)`,
+                        transform: `translateX(-${index * 100}%)`, // ✅ 한 장당 100%
                         transition: enableTransition
                             ? "transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1)"
                             : "none",
@@ -147,15 +136,10 @@ export const FeaturedSlider = () => {
                             <article
                                 key={`${movie.id}-${i}`}
                                 className="featured-card"
-                                style={{
-                                    width: `${slideWidthPercent}%`,
-                                }}
                             >
                                 {/* 왼쪽: 텍스트 */}
                                 <div className="featured-text">
-                                    <p className="featured-tag">
-                                        오늘의 추천
-                                    </p>
+                                    <p className="featured-tag">오늘의 추천</p>
                                     <h2 className="featured-title">
                                         {title}
                                     </h2>

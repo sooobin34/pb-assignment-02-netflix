@@ -1,8 +1,7 @@
-/* src/pages/Home/featured-slider.css */
-
 /* ===== 공통 레이아웃 ===== */
 
 .featured-wrapper {
+    width: 100%;
     padding: 16px 0 8px;
 }
 
@@ -24,9 +23,9 @@
     will-change: transform;
 }
 
-/* 각 슬라이드 카드 (기본: 가로 2열 레이아웃) */
+/* 각 슬라이드 카드 (한 화면 = 슬라이드 한 장) */
 .featured-card {
-    flex: 0 0 100%;
+    flex: 0 0 100%;          /* ✅ 항상 컨테이너 전체 폭 */
     display: flex;
     align-items: stretch;
     min-height: 260px;
@@ -86,8 +85,11 @@
     border: none;
     font-size: 13px;
     cursor: pointer;
-    transition: transform 0.16s ease, box-shadow 0.16s ease,
-    background 0.16s ease, color 0.16s ease;
+    transition:
+            transform 0.16s ease,
+            box-shadow 0.16s ease,
+            background 0.16s ease,
+            color 0.16s ease;
     will-change: transform, box-shadow;
 }
 
@@ -131,7 +133,9 @@
     height: 100%;
     object-fit: cover;
     transform: scale(1.02);
-    transition: transform 0.65s ease-out, filter 0.65s ease-out;
+    transition:
+            transform 0.65s ease-out,
+            filter 0.65s ease-out;
     will-change: transform, filter;
 }
 
@@ -167,8 +171,11 @@
     justify-content: center;
     cursor: pointer;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.75);
-    transition: transform 0.16s ease, background 0.16s ease, color 0.16s ease,
-    box-shadow 0.16s ease;
+    transition:
+            transform 0.16s ease,
+            background 0.16s ease,
+            color 0.16s ease,
+            box-shadow 0.16s ease;
     will-change: transform, box-shadow;
 }
 
@@ -203,7 +210,10 @@
     border: none;
     background: rgba(148, 163, 184, 0.55);
     cursor: pointer;
-    transition: width 0.18s ease, background 0.18s ease, opacity 0.18s ease;
+    transition:
+            width 0.18s ease,
+            background 0.18s ease,
+            opacity 0.18s ease;
 }
 
 .featured-dot.active {
@@ -273,6 +283,7 @@
 
     .featured-inner {
         border-radius: 0;
+        max-width: 100%;          /* ✅ 모바일에서는 화면 꽉 채우기 */
     }
 
     .featured-card {
