@@ -313,3 +313,31 @@
         bottom: 10px;
     }
 }
+
+/* ===== Featured Slider 모바일 보정 ===== */
+@media (max-width: 768px) {
+    .featured-wrapper {
+        margin: 0 -16px 12px; /* 양쪽으로 살짝 늘려서 화면 꽉 차게 */
+    }
+
+    .featured-inner {
+        border-radius: 0;
+    }
+
+    .featured-card {
+        min-height: 260px;
+    }
+
+    .featured-text {
+        padding: 16px;
+    }
+
+    .featured-title {
+        font-size: 1.4rem;
+    }
+
+    .featured-overview {
+        font-size: 0.9rem;
+        max-height: 4.5em;
+    }
+}

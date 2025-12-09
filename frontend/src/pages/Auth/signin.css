@@ -540,3 +540,54 @@
         transition: none;
     }
 }
+
+
+/* ===== Search 모바일 레이아웃 ===== */
+@media (max-width: 600px) {
+    .search-container {
+        padding-top: 64px;
+        padding-inline: 4%;
+        padding-bottom: 80px;
+    }
+
+    /* 필터 폼을 세로로 쌓기 */
+    .search-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .search-form {
+        padding: 14px 12px;
+    }
+
+    .search-field-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .search-field {
+        width: 100%;
+    }
+
+    .search-actions {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .search-actions button {
+        flex: 1;
+    }
+
+    /* 결과 테이블이 너무 넓으면 가로스크롤 */
+    .search-results {
+        margin-top: 16px;
+        overflow-x: auto;
+    }
+
+    .search-table {
+        min-width: 480px; /* 모바일에서도 내용 안 깨지고 가로 스크롤 */
+    }
+}

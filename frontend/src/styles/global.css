@@ -27,3 +27,41 @@ body {
     padding-top: 64px;
     padding-inline: 16px;
 }
+
+
+/* ===== Home 모바일 최적화 ===== */
+@media (max-width: 600px) {
+    .home-container {
+        padding-top: 64px;
+        padding-inline: 4%;
+        padding-bottom: 80px; /* 아래 살짝 여유 */
+    }
+
+    .home-section-title {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+
+    .home-continue-empty-box {
+        padding: 16px 14px;
+        font-size: 0.9rem;
+    }
+}
+
+/* ===== 모바일 레이아웃 공통 보정 ===== */
+@media (max-width: 768px) {
+    /* 각 페이지 컨테이너: 위 여백·가로 여백 줄이기 */
+    .home-container,
+    .popular-container,
+    .search-container,
+    .wishlist-container,
+    .wishlist-page,
+    .profile-select-page {
+        padding-top: 16px !important;     /* 헤더 아래 여백 너무 큰 것 보정 */
+        padding-inline: 16px !important;  /* 왼쪽만 붙고 오른쪽만 많이 남는 현상 방지 */
+        padding-bottom: 32px;
+        max-width: 100% !important;       /* 중간에 세로로 좁게 나오는 것 방지 */
+        box-sizing: border-box;
+    }
+}
+
