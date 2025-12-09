@@ -341,3 +341,15 @@
         max-height: 4.5em;
     }
 }
+
+/* 1024px 이하에서는 슬라이더가 화면 전체 폭을 쓰게 */
+@media (max-width: 1024px) {
+    .featured-inner {
+        max-width: 100%;
+    }
+}
+
+.featured-track {
+    width: 100%;
+    max-width: 100%;
+}
