@@ -1,22 +1,53 @@
 /* ===============================
    Page Layout
 ================================ */
+
 .profile-select-page {
+    width: 100%;
     min-height: 100vh;
     background: radial-gradient(circle at top, #222 0%, #000 70%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+/* 내부 콘텐츠 래퍼: 가운데 영역 고정 */
+.profile-select-inner {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+
+    padding-top: 80px;
+    padding-bottom: 80px;
+    padding-inline: 16px;
 }
 
 .profile-select-title {
     font-size: 32px;
     font-weight: 700;
-    margin-bottom: 40px;
+    margin-bottom: 12px;
     color: #fff;
+    text-align: center;
 }
 
+/* 제목 밑 안내 문구 */
+.profile-subtext {
+    margin-top: 4px;
+    margin-bottom: 32px;
+    font-size: 14px;
+    color: #e5e5e5;
+    text-align: center;
+    max-width: 640px;
+    margin-inline: auto;
+}
+
+/* 프로필 카드 그리드 */
 .profile-grid {
     display: flex;
     gap: 32px;
@@ -27,6 +58,7 @@
 /* ===============================
    Profile Card
 ================================ */
+
 .profile-card {
     position: relative;
     width: 140px;
@@ -46,7 +78,7 @@
 }
 
 .profile-card:hover {
-    transform: scale(1.1);
+    transform: scale(1.08);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
 }
 
@@ -99,6 +131,7 @@
 /* ===============================
    Modal Overlay
 ================================ */
+
 .profile-modal {
     position: fixed;
     inset: 0;
@@ -107,6 +140,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    z-index: 1000;
 }
 
 .profile-modal-box {
@@ -114,6 +149,7 @@
     padding: 28px;
     border-radius: 12px;
     width: 320px;
+    max-width: calc(100vw - 32px);
     text-align: center;
 }
 
@@ -125,6 +161,7 @@
 /* ===============================
    Modal Form
 ================================ */
+
 .profile-modal-field {
     margin-bottom: 16px;
     text-align: left;
@@ -195,6 +232,7 @@
 /* ===============================
    Modal Actions
 ================================ */
+
 .profile-modal-actions {
     display: flex;
     gap: 10px;
@@ -224,57 +262,50 @@
     background: #dc2626;
 }
 
-/* ✅ 프로필 전환 시 페이지 페이드아웃 애니메이션 */
+/* ✅ 프로필 전환 애니메이션 */
 .profile-select-page.profile-exit {
     animation: profile-exit 0.32s ease forwards;
 }
 
 @keyframes profile-exit {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-        filter: blur(0);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.97);
-        filter: blur(2px);
-    }
+    0% { opacity: 1; transform: scale(1); filter: blur(0); }
+    100% { opacity: 0; transform: scale(0.97); filter: blur(2px); }
 }
 
-/* ===== Profile Select 모바일 레이아웃 ===== */
+/* ===============================
+   모바일 (아이폰)
+================================ */
+
 @media (max-width: 600px) {
-    .profile-select-page {
-        padding-top: 64px;
-        padding-inline: 4%;
+    .profile-select-inner {
+        padding-top: 72px;
         padding-bottom: 80px;
+        padding-inline: 12px;
     }
 
     .profile-select-title {
-        font-size: 1.3rem;
-        text-align: left;
+        font-size: 1.4rem;
         margin-bottom: 10px;
     }
 
     .profile-subtext {
         font-size: 0.9rem;
+        margin-bottom: 20px;
     }
 
     .profile-grid {
-        margin-top: 16px;
         display: grid;
-        grid-template-columns: 1fr 1fr; /* 카드 2개씩 */
+        grid-template-columns: 1fr 1fr;
         gap: 14px;
+        width: 100%;
     }
 
     .profile-card {
-        padding: 14px 10px;
-        border-radius: 14px;
+        width: 100%;
+        height: 160px;
     }
 
     .profile-name {
         font-size: 0.9rem;
-        margin-top: 4px;
     }
 }
-

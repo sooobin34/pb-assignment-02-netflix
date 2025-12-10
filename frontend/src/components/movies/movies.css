@@ -1,4 +1,6 @@
-/* src/components/movies/movies.css */
+/* =========================================
+   영화 Row / 공통 섹션 레이아웃
+   ========================================= */
 
 .movie-section {
     margin-top: 24px;
@@ -10,13 +12,18 @@
     margin-bottom: 12px;
 }
 
+/* Row 전체 폭을 무조건 100%로 강제 (모바일 여백 문제 해결 핵심) */
 .movie-row {
     display: flex;
     gap: 12px;
     overflow-x: auto;
-    padding-bottom: 8px;
+    width: 100%;
+    margin: 0;
+    padding: 0 0 8px 0;
+    scroll-snap-type: x mandatory;
 }
 
+/* 스크롤바 스타일 */
 .movie-row::-webkit-scrollbar {
     height: 6px;
 }
@@ -25,13 +32,18 @@
     border-radius: 999px;
 }
 
+/* =========================================
+   영화 카드
+   ========================================= */
+
 .movie-card {
     position: relative;
     flex: 0 0 150px;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
     background: #111;
+    scroll-snap-align: start;
     transform: translateZ(0);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -49,6 +61,7 @@
     z-index: 1;
 }
 
+/* 카드 정보 */
 .movie-card-info {
     padding: 6px 8px 8px;
     font-size: 12px;
@@ -67,6 +80,7 @@
     color: #aaa;
 }
 
+/* 배지 */
 .movie-card-badge {
     position: absolute;
     top: 6px;
@@ -82,30 +96,31 @@
     border: 1px solid #fff;
 }
 
-/* 로딩 상태 */
+/* =========================================
+   로딩 스켈레톤
+   ========================================= */
+
 .movie-row-loading {
     display: flex;
     gap: 12px;
+    width: 100%;
 }
 
 .movie-skeleton {
     flex: 0 0 150px;
     height: 225px;
-    border-radius: 8px;
+    border-radius: 10px;
     background: linear-gradient(90deg, #111 0, #222 50%, #111 100%);
     background-size: 200% 100%;
     animation: shimmer 1.2s infinite;
 }
 
 @keyframes shimmer {
-    0% {
-        background-position: -200% 0;
-    }
-    100% {
-        background-position: 200% 0;
-    }
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
 }
 
+/* 에러 배너 */
 .error-banner {
     margin-top: 16px;
     padding: 10px 12px;
@@ -115,40 +130,45 @@
     font-size: 13px;
 }
 
+/* =========================================
+   Home 컨테이너 (핵심: 모바일 여백 제거)
+   ========================================= */
+
 .home-container {
-    padding-top: 40px;
-    padding-inline: 16px;
-    padding-bottom: 32px;
+    width: 100%;
+    margin: 0;
+    padding: 40px 16px 32px;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-
-/* ===== 영화 Row 모바일 튜닝 ===== */
-@media (max-width: 600px) {
-    .movie-row {
-        margin-bottom: 20px;
+/* 데스크탑: 중앙 정렬 + 최대폭 제한 */
+@media (min-width: 1024px) {
+    .home-container {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding-inline: 4%;
     }
+}
 
-    .movie-row-header {
+/* =========================================
+   모바일 전용 튜닝
+   ========================================= */
+
+@media (max-width: 600px) {
+    .movie-section-title {
+        font-size: 1rem;
         padding-inline: 4px;
     }
 
-    .movie-row-title {
-        font-size: 1rem;
-    }
-
-    /* 가로 스크롤 캐러셀 */
-    .movie-row-list {
+    .movie-row {
         gap: 12px;
-        padding-bottom: 8px;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
+        padding-bottom: 10px;
     }
 
     .movie-card {
         min-width: 130px;
         max-width: 150px;
-        scroll-snap-align: start;
+        border-radius: 10px;
     }
 
     .movie-card img {

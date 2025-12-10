@@ -1,14 +1,28 @@
+/* src/pages/Home/featured-slider.css */
+
+/* ─────────────────────────
+   전역 가로 스크롤 방지 (안전빵)
+   ───────────────────────── */
+html, body, #root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;   /* ✅ 옆으로 밀려나서 생기는 가로 스크롤 방지 */
+}
+
 /* ===== 공통 레이아웃 ===== */
 
 .featured-wrapper {
     width: 100%;
     padding: 16px 0 8px;
+    overflow: hidden;      /* ✅ 트랙이 살짝 넘쳐도 밖으로 안 나가게 */
 }
 
 .featured-inner {
     position: relative;
     width: 100%;
-    max-width: 1120px;
+    max-width: 1120px;     /* 데스크탑에서만 중앙 정렬 폭 제한 */
     margin: 0 auto;
     border-radius: 24px;
     overflow: hidden;
@@ -25,7 +39,7 @@
 
 /* 각 슬라이드 카드 (한 화면 = 슬라이드 한 장) */
 .featured-card {
-    flex: 0 0 100%;          /* ✅ 항상 컨테이너 전체 폭 */
+    flex: 0 0 100%;
     display: flex;
     align-items: stretch;
     min-height: 260px;
@@ -283,7 +297,8 @@
 
     .featured-inner {
         border-radius: 0;
-        max-width: 100%;          /* ✅ 모바일에서는 화면 꽉 채우기 */
+        max-width: 100%;   /* ✅ 모바일에서는 헤더와 동일하게 화면 꽉 채우기 */
+        margin: 0;
     }
 
     .featured-card {

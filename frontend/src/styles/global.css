@@ -75,3 +75,9 @@ main {
         padding-inline: 12px;
     }
 }
+
+/* ✅ 모바일에서 가로 넘침 방지 */
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}

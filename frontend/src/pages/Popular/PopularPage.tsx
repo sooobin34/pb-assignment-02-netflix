@@ -1,5 +1,5 @@
 // src/pages/Popular/PopularPage.tsx
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { createPortal } from "react-dom";
 import type { Movie, Genre } from "../../api/tmdb";
 import {
@@ -64,6 +64,9 @@ export const PopularPage = () => {
     const [scrollPage, setScrollPage] = useState(1);
     const [scrollLoading, setScrollLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
+
+    /* IntersectionObserver용 센티널 ref */
+    const sentinelRef = useRef<HTMLDivElement | null>(null);
 
     /* ===== 장르 목록 (마운트 시 1회) ===== */
     useEffect(() => {
@@ -176,21 +179,31 @@ export const PopularPage = () => {
         }
     }, [view, scrollMovies.length, scrollLoading, hasMore, loadMoreScroll]);
 
-    /* ===== Infinite 모드에서 스크롤 감시 ===== */
+    /* ===== IntersectionObserver로 무한 스크롤 감시 ===== */
     useEffect(() => {
         if (view !== "infinite") return;
 
-        const onScroll = () => {
-            if (
-                window.innerHeight + window.scrollY >=
-                document.documentElement.scrollHeight - 400
-            ) {
-                loadMoreScroll();
-            }
-        };
+        const target = sentinelRef.current;
+        if (!target) return;
 
-        window.addEventListener("scroll", onScroll);
-        return () => window.removeEventListener("scroll", onScroll);
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const first = entries[0];
+                if (first.isIntersecting) {
+                    loadMoreScroll();
+                }
+            },
+            {
+                root: null,
+                rootMargin: "0px 0px 400px 0px", // 화면 아래쪽 근처에서 미리 로딩
+                threshold: 0,
+            }
+        );
+
+        observer.observe(target);
+        return () => {
+            observer.disconnect();
+        };
     }, [view, loadMoreScroll]);
 
     /* ===== 핸들러들 ===== */
@@ -207,7 +220,7 @@ export const PopularPage = () => {
     const handleSwitchToInfinite = () => {
         setView("infinite");
         window.scrollTo({ top: 0 });
-        // 최초 로드는 위 useEffect에서 처리
+        // 실제 로딩은 위 useEffect에서 처리
     };
 
     const handleGenreChange = (value: string) => {
@@ -399,6 +412,9 @@ export const PopularPage = () => {
                                 불러왔습니다.
                             </div>
                         )}
+
+                        {/* 👀 이 div가 화면 하단에 보이면 다음 페이지 로딩 */}
+                        <div ref={sentinelRef} />
                     </div>
 
                     {/* 항상 화면 오른쪽 아래에 떠 있는 TOP 버튼 */}

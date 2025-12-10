@@ -8,16 +8,24 @@
     --transition-speed: 0.3s;
 }
 
-/* 전체 컨테이너: 부드럽게 떠오르는 애니메이션 추가 */
+/* ==================================
+   전체 컨테이너 (헤더 폭 맞추기)
+   ================================== */
 .search-container {
+    width: 100%;
+    max-width: 1120px;            /* ✅ 헤더/다른 페이지와 동일 폭 */
+    margin: 0 auto;               /* ✅ 가운데 정렬 */
+
     padding-top: 40px;
-    padding-inline: 4%; /* 좌우 여백을 %로 주어 반응형 대응 */
+    padding-inline: 16px;         /* 기본 좌우 여백 */
     padding-bottom: 32px;
-    background-color: #000; /* 완전 블랙 배경 */
+
+    background-color: #000;       /* 페이지 배경 */
     min-height: 100vh;
     color: #fff;
-    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     border-top: 1px solid rgba(255,255,255,0.06);
+
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes fadeUp {
@@ -26,7 +34,7 @@
 }
 
 .search-title {
-    font-size: 2rem; /* 폰트 크기 키움 */
+    font-size: 2rem;
     font-weight: 700;
     margin-bottom: 24px;
     color: #fff;
@@ -37,13 +45,13 @@
 .search-filters {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-end; /* 하단 정렬로 라인 맞춤 */
+    align-items: flex-end;
     gap: 16px;
     margin-bottom: 32px;
     padding: 20px;
     border-radius: 12px;
-    background: rgba(30, 30, 30, 0.6); /* 반투명 배경 */
-    backdrop-filter: blur(10px); /* 블러 효과 */
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
@@ -53,7 +61,7 @@
     flex-direction: column;
     gap: 8px;
     min-width: 140px;
-    flex: 1; /* 공간 균등 분배 시도 */
+    flex: 1;
 }
 
 .filter-group label {
@@ -78,15 +86,15 @@
     transition: all var(--transition-speed);
 }
 
-/* 입력 필드 포커스 시 넷플릭스 레드 글로우 효과 */
+/* 포커스 시 넷플릭스 레드 글로우 */
 .filter-group select:focus,
 .filter-group input[type="text"]:focus {
     border-color: var(--netflix-red);
     background: rgba(0, 0, 0, 0.6);
-    box-shadow: 0 0 0 1px var(--netflix-red); /* 글로우 효과 */
+    box-shadow: 0 0 0 1px var(--netflix-red);
 }
 
-/* Range Input 스타일링 (브라우저 기본 스타일 제거 후 커스텀) */
+/* Range Input */
 .filter-group input[type="range"] {
     -webkit-appearance: none;
     width: 100%;
@@ -116,7 +124,7 @@
 .filter-actions {
     display: flex;
     gap: 8px;
-    padding-bottom: 2px; /* 인풋과 높이 맞춤 보정 */
+    padding-bottom: 2px;
 }
 
 .filter-actions button {
@@ -136,7 +144,7 @@
 }
 
 .filter-actions button:first-child:hover {
-    background-color: #c11119; /* 살짝 어두운 레드 */
+    background-color: #c11119;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
 }
@@ -168,11 +176,11 @@
     100% { opacity: 0.5; }
 }
 
-/* --- 테이블 섹션: 깔끔한 리스트 뷰 --- */
+/* --- 테이블 섹션 --- */
 .search-table-wrap {
     margin-top: 24px;
     border-radius: 8px;
-    overflow: hidden; /* 모서리 둥글게 */
+    overflow: hidden;
     border: 1px solid #222;
 }
 
@@ -201,12 +209,12 @@
     transition: background 0.2s;
 }
 
-/* 테이블 행 호버 효과 */
+/* 행 호버 효과 */
 .search-table tr:hover td {
     background-color: #1f1f1f;
 }
 
-/* 포스터 이미지 줌 효과 */
+/* 포스터 셀 */
 .search-poster-cell img {
     width: 50px;
     height: 75px;
@@ -217,7 +225,7 @@
 }
 
 .search-table tr:hover .search-poster-cell img {
-    transform: scale(1.2); /* 호버 시 확대 */
+    transform: scale(1.2);
     z-index: 10;
     position: relative;
 }
@@ -285,25 +293,6 @@
     cursor: not-allowed;
 }
 
-/* 반응형 (모바일) */
-@media (max-width: 768px) {
-    .search-filters {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .filter-actions {
-        margin-top: 10px;
-        justify-content: flex-end;
-    }
-
-    .search-table th:nth-child(3), /* 개봉일 등 덜 중요한 정보 숨기기 예시 */
-    .search-table td:nth-child(3) {
-        display: none;
-    }
-}
-
-
 /* ==== 최근 검색어 UI ==== */
 .recent-searches {
     margin-top: 12px;
@@ -356,3 +345,35 @@
     color: #fff;
 }
 
+/* =========================
+   반응형 (태블릿/모바일)
+   ========================= */
+@media (max-width: 768px) {
+    .search-container {
+        padding-top: 32px;
+        padding-inline: 4%;       /* ✅ 모바일에서 헤더와 같은 % 여백 */
+    }
+
+    .search-title {
+        font-size: 1.6rem;
+        margin-bottom: 18px;
+    }
+
+    .search-filters {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .filter-actions {
+        margin-top: 10px;
+        justify-content: flex-end;
+    }
+
+    /* 화면이 좁을 때 덜 중요한 컬럼 숨기기 예시 */
+    .search-table th:nth-child(3),
+    .search-table td:nth-child(3) {
+        display: none;
+    }
+}
