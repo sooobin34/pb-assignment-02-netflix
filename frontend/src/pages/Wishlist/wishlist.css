@@ -1,44 +1,64 @@
 /* src/pages/Wishlist/wishlist.css */
 
+/* ==================================
+   컨테이너 (헤더/다른 페이지와 폭 맞추기)
+================================== */
 .wishlist-container {
+    width: 100%;
+    max-width: 1120px;                 /* ✅ Search / Popular / Profile 과 동일 */
+    margin: 0 auto;                    /* ✅ 가운데 정렬 */
+
     padding-top: 40px;
-    padding-inline: 4%; /* ✅ Search와 동일하게 % 기반 여백 */
+    padding-inline: 16px;              /* 기본 좌우 여백 */
     padding-bottom: 32px;
-    background-color: #000;     /* ✅ Search와 동일한 블랙 배경 */
+
+    background-color: #000;
     min-height: 100vh;
     color: #fff;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
-    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1); /* ✅ 부드러운 등장 */
+
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Search에서 쓰던 애니메이션 – 이미 정의돼 있다면 중복 정의여도 괜찮음 */
+/* Search에서 쓰던 애니메이션 – 중복 정의여도 문제 없음 */
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ✅ Search의 .search-title와 동일한 느낌으로 맞추기 */
+/* ==================================
+   제목
+================================== */
 .wishlist-title {
-    font-size: 2rem;        /* 기존 24px → 2rem */
+    font-size: 2rem;
     font-weight: 700;
     margin-bottom: 24px;
     color: #fff;
     letter-spacing: -0.5px;
 }
 
-/* 찜한 영화가 없을 때 */
+/* ==================================
+   비어 있을 때 안내 박스
+================================== */
 .wishlist-empty {
     margin-top: 40px;
     padding: 24px 20px;
     border-radius: var(--radius-lg);
-    background: radial-gradient(circle at top left, #222 0, #111 55%, #000 100%);
+    background: radial-gradient(
+            circle at top left,
+            #222 0,
+            #111 55%,
+            #000 100%
+    );
     border: 1px solid var(--border-subtle);
     color: #bdbdbd;
     font-size: 14px;
     line-height: 1.6;
 }
 
-/* 카드 그리드 – 이미 반응형이긴 했지만 Search와 느낌 맞게 유지 */
+/* ==================================
+   카드 그리드
+================================== */
 .wishlist-grid {
     margin-top: 16px;
     display: grid;
@@ -46,6 +66,7 @@
     gap: 18px;
 }
 
+/* 카드 */
 .wishlist-card {
     background: var(--bg-elevated);
     border-radius: 18px;
@@ -54,8 +75,10 @@
     border: 1px solid rgba(255, 255, 255, 0.02);
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s ease, box-shadow 0.2s ease,
-    border-color 0.2s ease;
+    transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            border-color 0.2s ease;
 }
 
 .wishlist-card:hover {
@@ -64,6 +87,7 @@
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
 }
 
+/* 포스터 영역 */
 .wishlist-poster-wrap {
     position: relative;
     overflow: hidden;
@@ -85,6 +109,7 @@
     transform: scale(1.08);
 }
 
+/* 뱃지 (삭제 등) */
 .wishlist-badge {
     position: absolute;
     top: 10px;
@@ -99,6 +124,7 @@
     backdrop-filter: blur(8px);
 }
 
+/* 카드 하단 정보 */
 .wishlist-info {
     padding: 12px 12px 16px;
 }
@@ -123,43 +149,38 @@
     line-height: 1.5;
 }
 
-/* ✅ 모바일 반응형 – 카드 폭 줄이고, 제목도 살짝 줄이기 */
+/* ==================================
+   반응형
+================================== */
+
+/* 태블릿 ~ 작은 데스크탑 */
 @media (max-width: 768px) {
     .wishlist-container {
-        padding-inline: 5%;   /* 좁은 화면에서 살짝 더 여유 */
+        padding-top: 32px;
+        padding-inline: 4%;           /* ✅ 좁은 화면에서 % 여백 */
     }
 
     .wishlist-title {
         font-size: 1.6rem;
+        margin-bottom: 20px;
     }
 
     .wishlist-grid {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 16px;
     }
 }
 
-@media (max-width: 480px) {
-    .wishlist-title {
-        font-size: 1.4rem;
-    }
-}
-
-/* ===== Wishlist 모바일 레이아웃 ===== */
+/* 모바일 좁은 화면 */
 @media (max-width: 600px) {
     .wishlist-container {
-        padding-top: 64px;
+        padding-top: 64px;            /* 헤더 아래 여백 조금 더 */
         padding-inline: 4%;
         padding-bottom: 80px;
     }
 
-    .wishlist-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-
-    .wishlist-count {
-        font-size: 0.9rem;
+    .wishlist-title {
+        font-size: 1.5rem;
     }
 
     .wishlist-grid {
@@ -170,5 +191,12 @@
     .wishlist-empty {
         padding: 18px 16px;
         font-size: 0.9rem;
+    }
+}
+
+/* 아주 좁은 화면에서 제목만 살짝 축소 */
+@media (max-width: 480px) {
+    .wishlist-title {
+        font-size: 1.4rem;
     }
 }

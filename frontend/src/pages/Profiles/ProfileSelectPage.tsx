@@ -53,11 +53,10 @@ export const ProfileSelectPage = () => {
     };
 
     const handleSelect = (id: string) => {
-        // ✅ 프로필별 최근 검색어 구분용 ID 저장
         try {
             localStorage.setItem("myflix:activeProfileId", id);
         } catch {
-            // 스토리지 막혀 있어도 앱이 터지지 않도록 무시
+            // ignore
         }
         setActiveProfile(id);
         navigate("/", { replace: true });
@@ -68,7 +67,6 @@ export const ProfileSelectPage = () => {
         if (!trimmed) return;
 
         if (modalMode === "add") {
-            // 2개 제한 – addProfile 이 false 리턴하면 그냥 종료
             const ok = addProfile(trimmed, color, icon);
             if (!ok) return;
         } else if (modalMode === "edit" && editingId) {
@@ -86,44 +84,45 @@ export const ProfileSelectPage = () => {
 
     return (
         <div className="profile-select-page">
-            <h1 className="profile-select-title">프로필을 선택하세요</h1>
-            <p className="profile-select-sub">
-                이 계정에서는 최대 <strong>2개의 프로필</strong>만 사용할 수 있습니다. (2인팟)
-            </p>
+            <div className="profile-select-inner">
+                <h1 className="profile-select-title">프로필을 선택하세요</h1>
+                <p className="profile-subtext">
+                    이 계정에서는 최대 <strong>2개의 프로필</strong>만 사용할 수 있습니다. (2인팟)
+                </p>
 
-            <div className="profile-grid">
-                {profiles.map((p) => (
-                    <button
-                        key={p.id}
-                        className="profile-card"
-                        onClick={() => handleSelect(p.id)}
-                        style={{ backgroundColor: p.color }}
-                    >
-                        {/* 우측 상단 수정 버튼 */}
+                <div className="profile-grid">
+                    {profiles.map((p) => (
                         <button
-                            type="button"
-                            className="profile-edit-btn"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                openEditModal(p.id);
-                            }}
-                            aria-label="프로필 수정"
+                            key={p.id}
+                            className="profile-card"
+                            onClick={() => handleSelect(p.id)}
+                            style={{ backgroundColor: p.color }}
                         >
-                            <FaPen size={12} />
+                            {/* 수정 버튼 */}
+                            <button
+                                type="button"
+                                className="profile-edit-btn"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    openEditModal(p.id);
+                                }}
+                                aria-label="프로필 수정"
+                            >
+                                <FaPen size={12} />
+                            </button>
+
+                            <div className="profile-icon">{p.icon}</div>
+                            <div className="profile-name">{p.name}</div>
                         </button>
+                    ))}
 
-                        <div className="profile-icon">{p.icon}</div>
-                        <div className="profile-name">{p.name}</div>
-                    </button>
-                ))}
-
-                {/* 프로필 추가 카드 (2개 미만일 때만) */}
-                {!isProfileLimitReached && (
-                    <button className="profile-card add-card" onClick={openAddModal}>
-                        <span className="profile-icon">+</span>
-                        <span className="profile-name">프로필 추가</span>
-                    </button>
-                )}
+                    {!isProfileLimitReached && (
+                        <button className="profile-card add-card" onClick={openAddModal}>
+                            <span className="profile-icon">+</span>
+                            <span className="profile-name">프로필 추가</span>
+                        </button>
+                    )}
+                </div>
             </div>
 
             {/* 추가 / 수정 모달 */}
@@ -132,7 +131,6 @@ export const ProfileSelectPage = () => {
                     <div className="profile-modal-box">
                         <h2>{modalMode === "add" ? "새 프로필" : "프로필 수정"}</h2>
 
-                        {/* 이름 */}
                         <div className="profile-modal-field">
                             <label>이름</label>
                             <input
@@ -143,7 +141,6 @@ export const ProfileSelectPage = () => {
                             />
                         </div>
 
-                        {/* 색상 선택 */}
                         <div className="profile-modal-field">
                             <label>색상</label>
                             <div className="profile-color-options">
@@ -161,7 +158,6 @@ export const ProfileSelectPage = () => {
                             </div>
                         </div>
 
-                        {/* 아이콘 선택 */}
                         <div className="profile-modal-field">
                             <label>아이콘</label>
                             <div className="profile-emoji-options">
@@ -180,7 +176,6 @@ export const ProfileSelectPage = () => {
                             </div>
                         </div>
 
-                        {/* 액션 버튼 */}
                         <div className="profile-modal-actions">
                             <button type="button" onClick={handleSave}>
                                 {modalMode === "add" ? "생성" : "저장"}

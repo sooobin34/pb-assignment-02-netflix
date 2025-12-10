@@ -12,26 +12,30 @@
 
 /* 로딩 스피너 */
 @keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
 }
 
-/* 컨테이너 */
+/* ================================
+   컨테이너 (공통 레이아웃)
+   ================================ */
+
 .popular-container {
+    width: 100%;
+    margin: 0;
     padding-top: 40px;
-    padding-inline: 4%;
+    padding-inline: 4%;      /* ✅ Search / Wishlist 와 동일 */
     padding-bottom: 32px;
     min-height: 100vh;
-    background-color: var(--netflix-black);
+    background-color: #000;  /* ✅ 다른 페이지와 동일한 블랙 */
     color: #fff;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* 헤더 */
+/* ================================
+   헤더
+   ================================ */
+
 .popular-header {
     display: flex;
     align-items: center;
@@ -86,7 +90,10 @@
     font-weight: 600;
 }
 
-/* 장르 필터 바 */
+/* ================================
+   장르 필터 바
+   ================================ */
+
 .popular-genre-bar {
     margin-top: 10px;
     margin-bottom: 16px;
@@ -110,7 +117,10 @@
     font-size: 14px;
 }
 
-/* 에러 / 로딩 */
+/* ================================
+   에러 / 로딩 표시
+   ================================ */
+
 .popular-error {
     margin-bottom: 16px;
     color: var(--netflix-red);
@@ -131,24 +141,34 @@
     animation: spin 1s linear infinite;
 }
 
-/* 래퍼 */
+/* ================================
+   래퍼
+   ================================ */
+
 .table-wrap,
 .scroll-wrap {
     margin-top: 8px;
+    width: 100%;
 }
 
 .scroll-wrap {
     position: relative;
 }
 
-/* 그리드 */
+/* ================================
+   그리드
+   ================================ */
+
 .popular-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 24px;
 }
 
-/* 카드 */
+/* ================================
+   카드
+   ================================ */
+
 .popular-card {
     position: relative;
     border: none;
@@ -158,8 +178,9 @@
     cursor: pointer;
     text-align: left;
     overflow: hidden;
-    transition: transform var(--transition-speed) ease,
-    box-shadow var(--transition-speed) ease;
+    transition:
+            transform var(--transition-speed) ease,
+            box-shadow var(--transition-speed) ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -253,7 +274,10 @@
     margin-right: 4px;
 }
 
-/* Table View: 페이지네이션 */
+/* ================================
+   Table View: 페이지네이션
+   ================================ */
+
 .popular-pagination {
     margin-top: 40px;
     display: flex;
@@ -294,7 +318,10 @@
     text-align: center;
 }
 
-/* Infinite View: TOP 버튼 */
+/* ================================
+   Infinite View: TOP 버튼
+   ================================ */
+
 .popular-top-btn {
     position: fixed;
     right: 24px;
@@ -314,16 +341,23 @@
     z-index: 9999;
 }
 
-/* 반응형 */
+/* ================================
+   반응형 - 모바일
+   ================================ */
+
 @media (max-width: 600px) {
     .popular-container {
-        padding-inline: 4%;
+        padding-inline: 8px;
     }
 
     .popular-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
+    }
+
+    .popular-title {
+        font-size: 1.4rem;
     }
 
     .view-toggle {
@@ -336,15 +370,6 @@
         gap: 16px;
     }
 
-    .popular-top-btn {
-        right: 16px;
-        bottom: 16px;
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
-    }
-
-    /* Infinite / Table 공통: 카드 살짝 더 작게 */
     .popular-card {
         border-radius: 10px;
     }
@@ -353,5 +378,11 @@
         font-size: 14px;
     }
 
-
+    .popular-top-btn {
+        right: 16px;
+        bottom: 16px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
 }
